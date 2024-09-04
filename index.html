@@ -1,58 +1,91 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Private Mesh Shop</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Private Mesh Shop</h1>
-        <button id="cart-button">🛒</button>
-        <button id="premium-button">Premium</button>
-    </header>
+    <div class="container">
+        <header>
+            <h1>Private Mesh Shop</h1>
+            <div id="premium-button" onclick="openPremiumPopup()">Premium</div>
+            <div id="cart-icon" onclick="openCart()">
+                🛒<span id="cart-count">0</span>
+            </div>
+            <div id="login-button" onclick="openLoginPopup()">🕵️‍♀️</div>
+        </header>
+        <main>
+            <div class="product">
+                <h2>Mystery Barrier</h2>
+                <p>Price: $1</p>
+                <button onclick="addToCart('Mystery Barrier', 1)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <h2>Mystery Explosive Device</h2>
+                <p>Price: $1</p>
+                <button onclick="addToCart('Mystery Explosive Device', 1)">Add to Cart</button>
+            </div>
+        </main>
 
-    <main>
-        <h2>Produits</h2>
-        <div class="product">
-            <h3>Mystery Barrier</h3>
-            <p>Price: $1</p>
-            <button onclick="addToCart('Mystery Barrier', 1)">Ajouter au panier</button>
+        <!-- Pop-up du panier -->
+        <div id="cart-popup" class="hidden">
+            <div class="cart-content">
+                <span id="close-popup" onclick="closeCart()">×</span>
+                <h3>Shopping Cart</h3>
+                <ul id="cart-items"></ul>
+                <p>Total: $<span id="total-price">0</span></p>
+                <p class="notice">Please take a screenshot of this summary before proceeding to purchase. You will be asked to provide it as proof.</p>
+                <button id="paypal-button" onclick="checkout()">Pay with PayPal</button>
+            </div>
         </div>
-        <div class="product">
-            <h3>Mystery Explosive Device</h3>
-            <p>Price: $1</p>
-            <button onclick="addToCart('Mystery Explosive Device', 1)">Ajouter au panier</button>
+
+        <!-- Pop-up Premium -->
+        <div id="premium-popup" class="hidden">
+            <div class="premium-content">
+                <span id="close-premium-popup" onclick="closePremiumPopup()">×</span>
+                <h3>Premium Subscriptions</h3>
+                <div class="subscription">
+                    <p>$5/month = 10 mesh</p>
+                    <button onclick="subscribe(5, 10)">Subscribe</button>
+                </div>
+                <div class="subscription">
+                    <p>$10/month = 20 mesh + Access to future promotion</p>
+                    <button onclick="subscribe(10, 20)">Subscribe</button>
+                </div>
+                <div class="subscription">
+                    <p>$20/month = 40 mesh + Access to future promotion + Possibility to Request Tailor-Made Meshes during purchase </p>
+                    <button onclick="subscribe(20, 40)">Subscribe</button>
+                </div>
+            </div>
         </div>
 
-        <h2>Abonnements</h2>
-        <div id="subscription-options">
-            <button onclick="subscribe(5)">5$/mois - 10 Mesh</button>
-            <button onclick="subscribe(10)">10$/mois - 20 Mesh</button>
-            <button onclick="subscribe(20)">20$/mois - 40 Mesh</button>
+        <!-- Pop-up de Connexion -->
+        <div id="login-popup" class="hidden">
+            <div class="login-content">
+                <span id="close-login-popup" onclick="closeLoginPopup()">×</span>
+                <h3>Login</h3>
+                <form id="login-form">
+                    <input type="text" id="login-username" placeholder="Username" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button type="button" onclick="login()">Log In</button>
+                </form>
+                <button id="logout-button" onclick="logout()">Logout</button>
+                <p class="error-message" id="login-error"></p>
+            </div>
         </div>
 
-        <h2>Créer un compte</h2>
-        <form id="create-account-form">
-            <label for="userId">User ID:</label>
-            <input type="text" id="userId" required>
-            <label for="username">Username:</label>
-            <input type="text" id="username" required>
-            <button type="submit">Créer un compte</button>
-        </form>
-    </main>
-
-    <div id="cart-popup" class="popup hidden">
-        <h3>Votre commande</h3>
-        <ul id="cart-items">
-            <!-- Les articles seront ajoutés ici -->
-        </ul>
-        <button id="continue-shopping">Continuer les achats</button>
-        <button id="checkout">Acheter</button>
-        <p>Veuillez prendre une capture d'écran du récapitulatif de la commande avant de passer à l'achat, car elle sera demandée.</p>
-        <a id="paypal-link" href="#" target="_blank">Payer avec PayPal</a>
+        <!-- Pop-up de l'historique des achats -->
+        <div id="purchase-history-popup" class="hidden">
+            <div class="purchase-history-content">
+                <span id="close-history-popup" onclick="closePurchaseHistoryPopup()">×</span>
+                <h3>Purchase History</h3>
+                <ul id="purchase-history"></ul>
+            </div>
+        </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
