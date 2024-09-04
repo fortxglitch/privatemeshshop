@@ -46,6 +46,15 @@ h1 {
     right: -10px;
 }
 
+#premium-button {
+    font-size: 18px;
+    color: #fff;
+    background-color: #bb86fc;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .product {
     background-color: #444;
     padding: 15px;
@@ -72,7 +81,7 @@ button:hover {
     background-color: #9b59b6;
 }
 
-#cart-popup {
+#cart-popup, #premium-popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -84,22 +93,22 @@ button:hover {
     align-items: center;
 }
 
-#cart-popup.hidden {
+#cart-popup.hidden, #premium-popup.hidden {
     display: none;
 }
 
-.cart-content {
+.cart-content, .premium-content {
     background-color: #444;
     padding: 20px;
     border-radius: 10px;
     width: 300px;
     text-align: center;
     position: relative;
-    max-height: 70vh; /* Limite la hauteur du popup à 70% de la fenêtre */
-    overflow-y: auto; /* Ajoute une barre de défilement si le contenu dépasse */
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
-#close-popup {
+#close-popup, #close-premium-popup {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -116,4 +125,13 @@ button:hover {
     font-size: 14px;
     color: #f0c674;
     margin-top: 10px;
+}
+
+.subscription {
+    margin: 10px 0;
+}
+
+.subscription p {
+    font-size: 16px;
+    color: #fff;
 }
