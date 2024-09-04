@@ -1,71 +1,172 @@
-// script.js
+let user = null;
+let cart = [];
+let totalPrice = 0;
 
-document.addEventListener('DOMContentLoaded', () => {
-    const cartButton = document.getElementById('cart-button');
-    const cartPopup = document.getElementById('cart-popup');
-    const continueShoppingButton = document.getElementById('continue-shopping');
-    const checkoutButton = document.getElementById('checkout');
-    const createAccountForm = document.getElementById('create-account-form');
-    const cartItems = document.getElementById('cart-items');
-    const paypalLink = document.getElementById('paypal-link');
+// Ajouter un compte utilisateur
+function addAccount(username, password) {
+    const users = JSON.parse(localStorage.getItem('users')) || {};
 
-    cartButton.addEventListener('click', () => {
-        cartPopup.classList.toggle('hidden');
-    });
+    if (users[username]) {
+        console.log('User already exists.');
+        return;
+    }
 
-    continueShoppingButton.addEventListener('click', () => {
-        cartPopup.classList.add('hidden');
-    });
+    users[username] = password;
+    localStorage.setItem('users', JSON.stringify(users));
+    console.log('Account created successfully:', username);
+}
 
-    checkoutButton.addEventListener('click', () => {
-        alert('Veuillez prendre une capture d\'écran du récapitulatif de la commande avant de passer à l\'achat, car elle sera demandée.');
-    });
+// Exemple d'utilisation pour ajouter un compte
+addAccount('admin1', 'teste');
 
-    createAccountForm.addEventListener('submit', (event) => {
-        event.preventDefault();
+// Se connecter
+function login() {
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+    const users = JSON.parse(localStorage.getItem('users')) || {};
 
-        const userId = document.getElementById('userId').value;
-        const username = document.getElementById('username').value;
+    console.log('Attempting to log in with:', username);
 
-        if (userId && username) {
-            // Stocker le compte dans le stockage local
-            localStorage.setItem('account', JSON.stringify({ userId, username }));
-            alert('Compte créé avec succès.');
-            createAccountForm.reset();
-        }
-    });
-});
+    if (users[username] && users[username] === password) {
+        user = username;
+        alert('Logged in successfully!');
+        closeLoginPopup();
+        loadPurchaseHistory();
+    } else {
+        document.getElementById('login-error').textContent = 'Invalid username or password.';
+        console.log('Login failed. Check if the username and password are correct.');
+    }
+}
 
-function addToCart(productName, price) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.push({ productName, price });
-    localStorage.setItem('cart', JSON.stringify(cart));
+// Déconnexion
+function logout() {
+    user = null;
+    alert('Logged out successfully!');
+    closePurchaseHistoryPopup();
+    closeLoginPopup();
+}
+
+// Ajouter au panier
+function addToCart(product, price) {
+    if (!user) {
+        alert('You must be logged in to make a purchase.');
+        return;
+    }
+
+    cart.push({ product, price });
+    updateCartIcon();
     updateCart();
 }
 
-function updateCart() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartItems = document.getElementById('cart-items');
-    cartItems.innerHTML = '';
-
-    let total = 0;
-    cart.forEach(item => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${item.productName} - $${item.price}`;
-        cartItems.appendChild(listItem);
-        total += item.price;
-    });
-
-    const totalItem = document.createElement('li');
-    totalItem.textContent = `Total: $${total}`;
-    cartItems.appendChild(totalItem);
-
-    const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=FortxGlitchoff&item_name=Purchase&amount=${total}&currency_code=USD`;
-    document.getElementById('paypal-link').href = paypalUrl;
+// Mettre à jour l'icône du panier
+function updateCartIcon() {
+    const cartCount = document.getElementById('cart-count');
+    cartCount.textContent = cart.length;
 }
 
-function subscribe(amount) {
-    // Stocker l'abonnement dans le stockage local
-    localStorage.setItem('subscription', JSON.stringify({ amount }));
-    alert(`Abonnement de ${amount}$/mois ajouté.`);
+// Ouvrir le panier
+function openCart() {
+    const cartElement = document.getElementById('cart-popup');
+    cartElement.classList.remove('hidden');
+    updateCart();
+}
+
+// Fermer le panier
+function closeCart() {
+    const cartElement = document.getElementById('cart-popup');
+    cartElement.classList.add('hidden');
+}
+
+// Ouvrir le pop-up Premium
+function openPremiumPopup() {
+    const premiumPopup = document.getElementById('premium-popup');
+    premiumPopup.classList.remove('hidden');
+}
+
+// Fermer le pop-up Premium
+function closePremiumPopup() {
+    const premiumPopup = document.getElementById('premium-popup');
+    premiumPopup.classList.add('hidden');
+}
+
+// Ouvrir le pop-up Connexion
+function openLoginPopup() {
+    const loginPopup = document.getElementById('login-popup');
+    loginPopup.classList.remove('hidden');
+}
+
+// Fermer le pop-up Connexion
+function closeLoginPopup() {
+    const loginPopup = document.getElementById('login-popup');
+    loginPopup.classList.add('hidden');
+}
+
+// Ouvrir le pop-up Historique d'achat
+function openPurchaseHistoryPopup() {
+    if (!user) {
+        alert('You must be logged in to view purchase history.');
+        return;
+    }
+
+    const purchaseHistoryPopup = document.getElementById('purchase-history-popup');
+    purchaseHistoryPopup.classList.remove('hidden');
+    loadPurchaseHistory();
+}
+
+// Fermer le pop-up Historique d'achat
+function closePurchaseHistoryPopup() {
+    const purchaseHistoryPopup = document.getElementById('purchase-history-popup');
+    purchaseHistoryPopup.classList.add('hidden');
+}
+
+// Mettre à jour le panier
+function updateCart() {
+    const cartItems = document.getElementById('cart-items');
+    const totalPriceElement = document.getElementById('total-price');
+
+    cartItems.innerHTML = '';
+    totalPrice = 0;
+
+    cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.product} - $${item.price}`;
+        cartItems.appendChild(li);
+        totalPrice += item.price;
+    });
+
+    totalPriceElement.textContent = totalPrice;
+}
+
+// Passer à PayPal
+function checkout() {
+    if (!user) {
+        alert('You must be logged in to make a purchase.');
+        return;
+    }
+
+    const paypalURL = `https://www.paypal.me/FortxGlitchoff/${totalPrice}`;
+    alert('Please take a screenshot of your cart summary before proceeding to PayPal.');
+    window.location.href = paypalURL;
+}
+
+// S'abonner
+function subscribe(amount, mesh) {
+    const paypalURL = `https://www.paypal.me/FortxGlitchoff/${amount}`;
+    alert(`You are subscribing to receive ${mesh} mesh per month for $${amount}.`);
+    window.location.href = paypalURL;
+}
+
+// Charger l'historique des achats
+function loadPurchaseHistory() {
+    if (!user) return;
+
+    const purchaseHistory = JSON.parse(localStorage.getItem('purchaseHistory')) || {};
+    const historyList = document.getElementById('purchase-history');
+    historyList.innerHTML = '';
+
+    (purchaseHistory[user] || []).forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        historyList.appendChild(li);
+    });
 }
