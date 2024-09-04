@@ -145,7 +145,7 @@ function updateOrderHistory() {
     const purchaseHistoryElement = document.getElementById('purchase-history');
     purchaseHistoryElement.innerHTML = '';
 
-    const orders = user.orders;
+    const orders = user ? user.orders : [];
     orders.forEach(order => {
         const li = document.createElement('li');
         li.textContent = `${order.product} - $${order.price}`;
