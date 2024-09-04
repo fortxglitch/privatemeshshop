@@ -1,17 +1,93 @@
-/* Bouton pour l'historique des commandes */
-#order-history-icon {
-    font-size: 24px;
-    cursor: pointer;
-    margin-left: 20px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 80%;
+    max-width: 600px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1 {
     color: #bb86fc;
 }
 
-#order-history-icon.hidden {
+#cart-icon, #account-icon, #order-history-icon {
+    font-size: 24px;
+    cursor: pointer;
+    position: relative;
+    color: #bb86fc;
+}
+
+#cart-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+}
+
+#premium-button {
+    font-size: 18px;
+    color: #fff;
+    background-color: #bb86fc;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product {
+    background-color: #444;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.product h2 {
+    color: #bb86fc;
+}
+
+button {
+    background-color: #bb86fc;
+    color: #1a1a1a;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #9b59b6;
+}
+
+.hidden {
     display: none;
 }
 
-/* Pop-up Historique des commandes */
-#order-history-popup {
+/* Pop-up du panier */
+#cart-popup, #premium-popup, #login-popup, #order-history-popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,11 +99,7 @@
     align-items: center;
 }
 
-#order-history-popup.hidden {
-    display: none;
-}
-
-.order-history-content {
+.cart-content, .premium-content, .login-content, .order-history-content {
     background-color: #444;
     padding: 20px;
     border-radius: 10px;
@@ -38,10 +110,30 @@
     overflow-y: auto;
 }
 
-#close-order-history-popup {
+#close-popup, #close-premium-popup, #close-login-popup, #close-order-history-popup {
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
     font-size: 24px;
+}
+
+.notice {
+    font-size: 14px;
+    color: #f0c674;
+    margin-top: 10px;
+}
+
+.subscription {
+    margin: 10px 0;
+}
+
+.subscription p {
+    font-size: 16px;
+    color: #fff;
+}
+
+#error {
+    color: red;
+    font-size: 14px;
 }
