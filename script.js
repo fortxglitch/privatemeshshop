@@ -23,6 +23,16 @@ function closeCart() {
     cartElement.classList.add('hidden');
 }
 
+function openPremiumPopup() {
+    const premiumPopup = document.getElementById('premium-popup');
+    premiumPopup.classList.remove('hidden');
+}
+
+function closePremiumPopup() {
+    const premiumPopup = document.getElementById('premium-popup');
+    premiumPopup.classList.add('hidden');
+}
+
 function updateCart() {
     const cartItems = document.getElementById('cart-items');
     const totalPriceElement = document.getElementById('total-price');
@@ -43,5 +53,11 @@ function updateCart() {
 function checkout() {
     const paypalURL = `https://www.paypal.me/FortxGlitchoff/${totalPrice}`;
     alert('Please take a screenshot of your cart summary before proceeding to PayPal.');
+    window.location.href = paypalURL;
+}
+
+function subscribe(amount, mesh) {
+    const paypalURL = `https://www.paypal.me/FortxGlitchoff/${amount}`;
+    alert(`You are subscribing to receive ${mesh} mesh per month for $${amount}.`);
     window.location.href = paypalURL;
 }
