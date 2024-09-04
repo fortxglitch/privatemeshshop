@@ -10,6 +10,7 @@
     <div class="container">
         <header>
             <h1>Private Mesh Shop</h1>
+            <div id="premium-button" onclick="openPremiumPopup()">Premium</div>
             <div id="cart-icon" onclick="openCart()">
                 🛒<span id="cart-count">0</span>
             </div>
@@ -27,6 +28,7 @@
             </div>
         </main>
 
+        <!-- Pop-up du panier -->
         <div id="cart-popup" class="hidden">
             <div class="cart-content">
                 <span id="close-popup" onclick="closeCart()">×</span>
@@ -35,6 +37,26 @@
                 <p>Total: $<span id="total-price">0</span></p>
                 <p class="notice">Please take a screenshot of this summary before proceeding to purchase. You will be asked to provide it as proof.</p>
                 <button id="paypal-button" onclick="checkout()">Pay with PayPal</button>
+            </div>
+        </div>
+
+        <!-- Pop-up Premium -->
+        <div id="premium-popup" class="hidden">
+            <div class="premium-content">
+                <span id="close-premium-popup" onclick="closePremiumPopup()">×</span>
+                <h3>Premium Subscriptions</h3>
+                <div class="subscription">
+                    <p>$5/month = 10 mesh</p>
+                    <button onclick="subscribe(5, 10)">Subscribe</button>
+                </div>
+                <div class="subscription">
+                    <p>$10/month = 20 mesh + Access to future promotion</p>
+                    <button onclick="subscribe(10, 20)">Subscribe</button>
+                </div>
+                <div class="subscription">
+                    <p>$20/month = 40 mesh + Access to future promotion + Possibility to Request Tailor-Made Meshes during purchase </p>
+                    <button onclick="subscribe(20, 40)">Subscribe</button>
+                </div>
             </div>
         </div>
     </div>
