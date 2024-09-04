@@ -58,6 +58,6 @@ function checkout() {
 
 function subscribe(amount, mesh) {
     const paypalURL = `https://www.paypal.me/FortxGlitchoff/${amount}`;
-    alert(`You are subscribing to receive ${mesh} mesh per month for $${amount}.`);
+    alert(`Please take a screenshot when making your purchase and open a ticket on the Discord server`);
     window.location.href = paypalURL;
 }
