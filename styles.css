@@ -30,11 +30,10 @@ h1 {
     color: #bb86fc;
 }
 
-#cart-icon, #account-icon, #order-history-icon {
+#cart-icon {
     font-size: 24px;
     cursor: pointer;
     position: relative;
-    color: #bb86fc;
 }
 
 #cart-count {
@@ -82,12 +81,7 @@ button:hover {
     background-color: #9b59b6;
 }
 
-.hidden {
-    display: none;
-}
-
-/* Pop-up du panier */
-#cart-popup, #premium-popup, #login-popup, #order-history-popup {
+#cart-popup, #premium-popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -99,7 +93,11 @@ button:hover {
     align-items: center;
 }
 
-.cart-content, .premium-content, .login-content, .order-history-content {
+#cart-popup.hidden, #premium-popup.hidden {
+    display: none;
+}
+
+.cart-content, .premium-content {
     background-color: #444;
     padding: 20px;
     border-radius: 10px;
@@ -110,12 +108,17 @@ button:hover {
     overflow-y: auto;
 }
 
-#close-popup, #close-premium-popup, #close-login-popup, #close-order-history-popup {
+#close-popup, #close-premium-popup {
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
     font-size: 24px;
+}
+
+#paypal-button {
+    margin-top: 10px;
+    width: 100%;
 }
 
 .notice {
@@ -131,9 +134,4 @@ button:hover {
 .subscription p {
     font-size: 16px;
     color: #fff;
-}
-
-#error {
-    color: red;
-    font-size: 14px;
 }
