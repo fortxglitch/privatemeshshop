@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Mesh Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Private Mesh Shop</h1>
+            <div id="cart-icon" onclick="openCart()">
+                🛒<span id="cart-count">0</span>
+            </div>
+        </header>
+        <main>
+            <div class="product">
+                <h2>Mystery Barrier</h2>
+                <p>Price: $1</p>
+                <button onclick="addToCart('Mystery Barrier', 1)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <h2>Mystery Explosive Device</h2>
+                <p>Price: $1</p>
+                <button onclick="addToCart('Mystery Explosive Device', 1)">Add to Cart</button>
+            </div>
+        </main>
+
+        <div id="cart-popup" class="hidden">
+            <div class="cart-content">
+                <span id="close-popup" onclick="closeCart()">×</span>
+                <h3>Shopping Cart</h3>
+                <ul id="cart-items"></ul>
+                <p>Total: $<span id="total-price">0</span></p>
+                <p class="notice">Please take a screenshot of this summary before proceeding to purchase. You will be asked to provide it as proof.</p>
+                <button id="paypal-button" onclick="checkout()">Pay with PayPal</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
