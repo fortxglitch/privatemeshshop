@@ -14,8 +14,6 @@
             <div id="cart-icon" onclick="openCart()">
                 🛒<span id="cart-count">0</span>
             </div>
-            <div id="account-icon" onclick="openLoginPopup()">🕵️‍♀️</div>
-            <div id="order-history-icon" class="hidden" onclick="openOrderHistoryPopup()">⏲</div>
         </header>
         <main>
             <div class="product">
@@ -59,27 +57,6 @@
                     <p>$20/month = 40 mesh + Access to future promotion + Possibility to Request Tailor-Made Meshes during purchase</p>
                     <button onclick="subscribe(20, 40)">Subscribe</button>
                 </div>
-            </div>
-        </div>
-
-        <!-- Pop-up Connexion -->
-        <div id="login-popup" class="hidden">
-            <div class="login-content">
-                <span id="close-login-popup" onclick="closeLoginPopup()">×</span>
-                <h3>Login</h3>
-                <input type="text" id="login-username" placeholder="Username">
-                <input type="password" id="login-password" placeholder="Password">
-                <button onclick="login()">Login</button>
-                <p id="login-error" class="error"></p>
-            </div>
-        </div>
-
-        <!-- Pop-up Historique des commandes -->
-        <div id="order-history-popup" class="hidden">
-            <div class="order-history-content">
-                <span id="close-order-history-popup" onclick="closeOrderHistoryPopup()">×</span>
-                <h3>Order History</h3>
-                <ul id="purchase-history"></ul>
             </div>
         </div>
     </div>
