@@ -1,87 +1,17 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1a;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.container {
-    width: 80%;
-    max-width: 600px;
-    background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-h1 {
-    color: #bb86fc;
-}
-
-#cart-icon, #login-button {
+/* Bouton pour l'historique des commandes */
+#order-history-icon {
     font-size: 24px;
     cursor: pointer;
-    position: relative;
-}
-
-#cart-count {
-    background-color: red;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 8px;
-    position: absolute;
-    top: -10px;
-    right: -10px;
-}
-
-#premium-button {
-    font-size: 18px;
-    color: #fff;
-    background-color: #bb86fc;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.product {
-    background-color: #444;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.product h2 {
+    margin-left: 20px;
     color: #bb86fc;
 }
 
-button {
-    background-color: #bb86fc;
-    color: #1a1a1a;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+#order-history-icon.hidden {
+    display: none;
 }
 
-button:hover {
-    background-color: #9b59b6;
-}
-
-#cart-popup, #premium-popup, #login-popup, #purchase-history-popup {
+/* Pop-up Historique des commandes */
+#order-history-popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -93,11 +23,11 @@ button:hover {
     align-items: center;
 }
 
-#cart-popup.hidden, #premium-popup.hidden, #login-popup.hidden, #purchase-history-popup.hidden {
+#order-history-popup.hidden {
     display: none;
 }
 
-.cart-content, .premium-content, .login-content, .purchase-history-content {
+.order-history-content {
     background-color: #444;
     padding: 20px;
     border-radius: 10px;
@@ -108,52 +38,10 @@ button:hover {
     overflow-y: auto;
 }
 
-#close-popup, #close-premium-popup, #close-login-popup, #close-history-popup {
+#close-order-history-popup {
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
     font-size: 24px;
-}
-
-#paypal-button {
-    margin-top: 10px;
-    width: 100%;
-}
-
-.notice {
-    font-size: 14px;
-    color: #f0c674;
-    margin-top: 10px;
-}
-
-.subscription {
-    margin: 10px 0;
-}
-
-.subscription p {
-    font-size: 16px;
-    color: #fff;
-}
-
-.login-content input {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 80%;
-    border-radius: 5px;
-    border: none;
-}
-
-.error-message {
-    color: #ff0000;
-}
-
-.purchase-history-content ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.purchase-history-content li {
-    margin: 5px 0;
 }
